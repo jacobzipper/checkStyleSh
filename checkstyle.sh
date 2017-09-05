@@ -40,7 +40,9 @@ then
 	filename=${file##*/}
 	filenameNoExtension=${filename%.*}
 	dirpath=${file%/*}
-	cd $dirpath
+	if [[ $dirpath == $filename ]]; then
+    	cd $dirpath
+	fi
 	if javac $filename; then
 	    printf "Compiled Successfully\n\n"
 	else
