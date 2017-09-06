@@ -17,7 +17,7 @@ while getopts ":a" opt; do
 				filenameNoExtension=${filename%.*}
 				dirpath=${file%/*}
 				cd $dirpath
-				if javac $filename; then
+				if javac -Xlint $filename; then
 					printf "Compiled Successfully\n\n"
 				else
 					echo "Failed to compile"
@@ -40,8 +40,10 @@ then
 	filename=${file##*/}
 	filenameNoExtension=${filename%.*}
 	dirpath=${file%/*}
-	cd $dirpath
-	if javac $filename; then
+	if [[ $dirpath == $filename ]]; then
+    	cd $dirpath
+	fi
+	if javac -Xlint $filename; then
 	    printf "Compiled Successfully\n\n"
 	else
 	    echo "Failed to compile"
